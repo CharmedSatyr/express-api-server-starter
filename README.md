@@ -7,7 +7,7 @@
 ### Links and Resources
 
 - [GitHub Repository]()
-- [![Build Status](https://travis-ci.com/CharmedSatyr/express-api-server-starter.svg?branch=master)](https://travis-ci.com/CharmedSatyr/express-api-server-starter)
+- [![Build Status](https://travis-ci.com/CharmedSatyr/express-api-server-starter.svg?branch=master)](https://travis-ci.com/CharmedSatyr/express-api-server-starter) [![Greenkeeper badge](https://badges.greenkeeper.io/CharmedSatyr/express-api-server-starter.svg)](https://greenkeeper.io/)
 - [Application]()
 
 #### Documentation
