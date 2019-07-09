@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: api/v1.router.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: api/v1.router.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+
+// Create a router instance
+const router = require('express').Router();
+
+// Import middleware
+const auth = require('../auth/middleware.js');
+const modelFinder = require('../middleware/model-finder.js');
+
+// Instantiate Q client
+const Q = require('@nmq/q/client');
+
+// Dynamically evaluate the model
+router.param('model', modelFinder);
+
+// Declare routes
+router.get('/', home);
+router.get(`/api/v1/:model`, getRecords);
+router.get(`/api/v1/:model/:id`, getRecords);
+router.post(`/api/v1/:model`, auth('create'), createRecord);
+router.put(`/api/v1/:model/:id`, auth('update'), updateRecord);
+router.patch(`/api/v1/:model/:id`, auth('update'), patchRecord);
+router.delete(`/api/v1/:model/:id`, auth('delete'), deleteRecord);
+
+/**
+ * Display a home page
+ * Publish the request `url` as a `read` event to the
+ * `database` namespace of the message queue
+ * @function
+ * @name home
+ * @param req {object} Express request object
+ * @param res {object} Express response object
+ * @param next {function} Express middleware function
+ **/
+function home(req, res, next) {
+  const { url } = req;
+  Q.publish('database', 'read', { url });
+  res.status(200).send('Welcome to the home page!');
+}
+
+/**
+ * Get all or one record
+ * Publish the request `url` and `id` parameter as a `read`
+ * event to the `database` namespace of the message queue
+ * @function
+ * @name getAll
+ * @param req {object} Express request object
+ * @param res {object} Express response object
+ * @param next {function} Express middleware function
+ **/
+function getRecords(req, res, next) {
+  const { url } = req;
+  const { id } = req.params;
+  Q.publish('database', 'read', { id: id || null, url });
+  req.model
+    .get(id)
+    .then(results => res.status(200).send(results))
+    .catch(next);
+}
+
+/**
+ * Create a new record
+ * Publish the request `url` and `body` as a `create` event
+ * to the `database` namespace of the message queue
+ * @function
+ * @name createRecord
+ * @param req {object} Express request object
+ * @param res {object} Express response object
+ * @param next {function} Express middleware function
+ **/
+function createRecord(req, res, next) {
+  const { body, url } = req;
+  Q.publish('database', 'create', { body, url });
+  req.model
+    .post(body)
+    .then(result => res.status(200).send(result))
+    .catch(next);
+}
+
+/**
+ * Update a record - upserts if the record does not exist
+ * Publish the request `url`, `body`, and `id` parameter as
+ * an `update` event to the `database` namespace of the
+ * message queue
+ * @function
+ * @name updateRecord
+ * @param req {object} Express request object
+ * @param res {object} Express response object
+ * @param next {function} Express middleware function
+ **/
+function updateRecord(req, res, next) {
+  const { url, body } = req;
+  const { id } = req.params;
+  Q.publish('database', 'update', { url, body, id });
+  req.model
+    .put(id, body)
+    .then(result => res.status(200).send(result))
+    .catch(next);
+}
+
+/**
+ * Patch a new record - does not upsert
+ * Update a record - upserts if the record does not exist
+ * Publish the request `url`, `body`, and `id` parameter as
+ * an `update` event to the `database` namespace of the
+ * message queue
+ * @function
+ * @name patchRecord
+ * @param req {object} Express request object
+ * @param res {object} Express response object
+ * @param next {function} Express middleware function
+ **/
+function patchRecord(req, res, next) {
+  const { url, body } = req;
+  const { id } = req.params;
+  Q.publish('database', 'update', { url, body, id });
+  req.model
+    .patch(id, body)
+    .then(result => res.status(200).send(result))
+    .catch(next);
+}
+
+/**
+ * Delete a record
+ * Publish the request `url` and `id` parameter as
+ * a `delete` event to the `database` namespace of the
+ * message queue
+ * @function
+ * @name deleteRecord
+ * @param req {object} Express request object
+ * @param res {object} Express response object
+ * @param next {function} Express middleware function
+ **/
+function deleteRecord(req, res, next) {
+  const { url } = req;
+  const { id } = req.params;
+  Q.publish('database', 'delete', { id, url });
+  req.model
+    .delete(id)
+    .then(result => res.status(200).send(result))
+    .catch(next);
+}
+
+module.exports = router;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="auth_users.module_model.html">model</a></li><li><a href="module-auth_middleware.html">auth/middleware</a></li><li><a href="module-auth_router.html">auth/router</a></li><li><a href="module-middleware_404.html">middleware/404</a></li><li><a href="module-middleware_error.html">middleware/error</a></li><li><a href="module-middleware_model-finder.html">middleware/model-finder</a></li><li><a href="module-src_server.html">src/server</a></li></ul><h3>Classes</h3><ul><li><a href="BooksModel.html">BooksModel</a></li><li><a href="ModelClass.html">ModelClass</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addRole">addRole</a></li><li><a href="global.html#autoPopulateRoles">autoPopulateRoles</a></li><li><a href="global.html#autoPopulateUsers">autoPopulateUsers</a></li><li><a href="global.html#createRecord">createRecord</a></li><li><a href="global.html#deleteRecord">deleteRecord</a></li><li><a href="global.html#forceErr">forceErr</a></li><li><a href="global.html#getAll">getAll</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#home">home</a></li><li><a href="global.html#patchRecord">patchRecord</a></li><li><a href="global.html#randomRecord">randomRecord</a></li><li><a href="global.html#updateRecord">updateRecord</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Apr 12 2019 09:47:25 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
