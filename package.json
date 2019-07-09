@@ -1,0 +1,53 @@
+{
+  "name": "express-api-server-starter",
+  "version": "0.0.1",
+  "description": "An extensible, authenticated REST server with event logging",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "author": "CharmedSatyr <z@charmed.tech>",
+  "license": "GPL-3.0-or-later",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CharmedSatyr/express-api-server-starter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CharmedSatyr/express-api-server-starter/issues"
+  },
+  "homepage": "https://github.com/CharmedSatyr/express-api-server-starter#readme",
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon index.js",
+    "lint": "eslint '**/*.js'",
+    "test": "jest --coverage --verbose",
+    "test-watch": "jest --coverage --verbose --watch",
+    "jsdoc": "jsdoc -c ./docs/config/jsdoc.config.json"
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
+    "mongodb-memory-server": "^5.1.5",
+    "mongoose": "^5.6.4",
+    "mongoose-schema-jsonschema": "^1.2.1",
+    "morgan": "^1.9.1",
+    "supertest": "^4.0.2",
+    "swagger-ui-express": "^4.0.7"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.2",
+    "eslint": "^6.0.1",
+    "jest": "^24.8.0",
+    "jsdoc": "^3.6.2",
+    "prettier": "^1.18.2"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
