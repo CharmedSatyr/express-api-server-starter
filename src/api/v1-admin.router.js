@@ -37,7 +37,7 @@ router.post(
  * @param next {function} Express middleware function
  **/
 function randomRecord(req, res, next) {
-  const { url } = req;
+  // const { url } = req;
   const record = {
     title: word(),
     author: word(),
