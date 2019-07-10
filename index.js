@@ -4,7 +4,7 @@
 require('dotenv').config();
 
 // Import the server's `start` method
-const { start } = require('./src/server.js');
+const { start } = require('./src/server');
 
 // Start up database server with options
 const mongoose = require('mongoose');

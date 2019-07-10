@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: auth/auth.router.js</title>
+    <title>JSDoc: Source: routes/v1-admin.router.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: auth/auth.router.js</h1>
+    <h1 class="page-title">Source: routes/v1-admin.router.js</h1>
 
     
 
@@ -28,101 +28,76 @@
         <article>
             <pre class="prettyprint source linenums"><code>'use strict';
 
-/**
- * Authentication router module - Allows signup (user creation) and signin authentication
- * @module auth/router
- */
+const router = require('express').Router();
+const { word } = require('faker').lorem;
 
-const express = require('express');
-const authRouter = express.Router();
+// Import middleware
+const auth = require('../auth/middleware');
+const modelFinder = require('../middleware/model-finder');
 
-const User = require('./users.schema');
-const auth = require('./middleware');
-// const oauth = require('./oauth/google');
+// Dynamically evaluate the model
+router.param('model', modelFinder);
 
-// Routes
-authRouter.post('/signup', signup);
-authRouter.post('/signin', auth(), signin);
-// authRouter.post('/oauth', oauth);
-authRouter.post('/key', auth(), key);
+// Instantiate Q client
+// const Q = require('@nmq/q/client');
 
-/**
+// Testing routes
+router.post('/api/error', forceErr);
+router.post(
+  `/api/v1/:model/random`,
+  auth('read'),
+  auth('create'),
+  auth('update'),
+  auth('delete'),
+  randomRecord
+);
+
+/***
+ * Force error handling
+ * This is useful for testing the `./src/middleware/500.js` export
  * @function
- * @name /signup POST route handler
+ * @name forceErr
  * @param req {object} Express request object
  * @param res {object} Express response object
  * @param next {function} Express middleware function
- */
-function signup(req, res, next) {
-  const user = new User(req.body);
-  user
-    .save()
-    .then(user => {
-      User.findOne({ _id: user._id }).then(user => {
-        console.log('USER', user);
-        req.token = user.generateToken();
-        req.user = user;
-        res.set('token', req.token);
-        res.cookie('auth', req.token);
-        res.send(req.token);
-      });
-    })
+ ***/
+function forceErr(req, res, next) {
+  next('Error!');
+}
+
+/**
+ * Generate a random record for testing purposes
+ * Publish the request `url` and the `record` in a
+ * `create` event to the `database` namespace of the message queue
+ * TODO: Currently hardcoded to use the `book` model's attributes but
+ * could be made more dynamic through dynamic key and value-type
+ * setting based on the model's Mongoose schema.
+ * BETTER: Similar functionality could be added through a static method * on each model.
+ * @function
+ * @name randomRecord
+ * @param req {object} Express request object
+ * @param res {object} Express response object
+ * @param next {function} Express middleware function
+ **/
+function randomRecord(req, res, next) {
+  // const { url } = req;
+  const record = {
+    title: word(),
+    author: word(),
+    isbn: word(),
+    image_url: word(),
+    description: word(),
+    bookshelf: word(),
+  };
+
+  // Q.publish('database', 'create', { record, url });
+  req.model
+    .post(record)
+    .then(result => res.status(200).send(result))
     .catch(next);
 }
 
-/**
- * @function
- * @name /signin POST route handler
- * @param req {object} Express request object
- * @param res {object} Express response object
- * @param next {function} Express middleware function
- */
-function signin(req, res, next) {
-  try {
-    res.cookie('auth', req.token);
-    res.send(req.token);
-  } catch (e) {
-    next(e);
-  }
-}
-
-/**
- * *UNTESTED*
- * Used when signing in via Google
- * @function
- * @name /signin POST route handler
- * @param req {object} Express request object
- * @param res {object} Express response object
- * @param next {function} Express middleware function
- */
-/*
-function oauth(req, res, next) {
-  oauth
-    .authorize(req)
-    .then(token => {
-      res.status(200).send(token);
-    })
-    .catch(next);
-}
-
-/**
- * Used to generate a permanent access key
- * @function
- * @name /signin POST route handler
- * @param req {object} Express request object
- * @param res {object} Express response object
- * @param next {function} Express middleware function
- */
-function key(req, res, next) {
-  try {
-    const key = req.user.generateKey();
-    res.status(200).send(key);
-  } catch (e) {
-    next(e);
-  }
-}
-
-module.exports = authRouter;
+module.exports = router;
 </code></pre>
         </article>
     </section>

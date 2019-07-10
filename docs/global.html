@@ -94,6 +94,74 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="mongoose"><span class="type-signature">(constant) </span>mongoose<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Combines SuperTest and Mongoose Memory Server
+to reduce (hopefully) the pain of
+testing a Mongoose API
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="-__tests___supergoose.js.html">__tests__/supergoose.js</a>, <a href="-__tests___supergoose.js.html#line7">line 7</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -251,7 +319,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="auth_auth-admin.router.js.html">auth/auth-admin.router.js</a>, <a href="auth_auth-admin.router.js.html#line44">line 44</a>
+        <a href="auth_auth-admin.router.js.html">auth/auth-admin.router.js</a>, <a href="auth_auth-admin.router.js.html#line32">line 32</a>
     </li></ul></dd>
     
 
@@ -261,6 +329,8 @@
 
     
 </dl>
+
+
 
 
 
@@ -432,7 +502,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="auth_auth-admin.router.js.html">auth/auth-admin.router.js</a>, <a href="auth_auth-admin.router.js.html#line62">line 62</a>
+        <a href="auth_auth-admin.router.js.html">auth/auth-admin.router.js</a>, <a href="auth_auth-admin.router.js.html#line50">line 50</a>
     </li></ul></dd>
     
 
@@ -442,6 +512,8 @@
 
     
 </dl>
+
+
 
 
 
@@ -613,7 +685,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="auth_auth-admin.router.js.html">auth/auth-admin.router.js</a>, <a href="auth_auth-admin.router.js.html#line92">line 92</a>
+        <a href="auth_auth-admin.router.js.html">auth/auth-admin.router.js</a>, <a href="auth_auth-admin.router.js.html#line80">line 80</a>
     </li></ul></dd>
     
 
@@ -623,6 +695,8 @@
 
     
 </dl>
+
+
 
 
 
@@ -796,7 +870,7 @@ to the `database` namespace of the message queue
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_v1.router.js.html">api/v1.router.js</a>, <a href="api_v1.router.js.html#line61">line 61</a>
+        <a href="routes_v1.router.js.html">routes/v1.router.js</a>, <a href="routes_v1.router.js.html#line61">line 61</a>
     </li></ul></dd>
     
 
@@ -806,6 +880,8 @@ to the `database` namespace of the message queue
 
     
 </dl>
+
+
 
 
 
@@ -980,7 +1056,7 @@ message queue
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_v1.router.js.html">api/v1.router.js</a>, <a href="api_v1.router.js.html#line123">line 123</a>
+        <a href="routes_v1.router.js.html">routes/v1.router.js</a>, <a href="routes_v1.router.js.html#line123">line 123</a>
     </li></ul></dd>
     
 
@@ -992,186 +1068,6 @@ message queue
 </dl>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="forceErr"><span class="type-signature"></span>forceErr<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Force error handling
-This is useful for testing the `./src/middleware/500.js` export
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>req</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Express request object</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Express response object</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>next</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Express middleware function</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="auth_auth-admin.router.js.html">auth/auth-admin.router.js</a>, <a href="auth_auth-admin.router.js.html#line14">line 14</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -1345,7 +1241,7 @@ event to the `database` namespace of the message queue
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_v1.router.js.html">api/v1.router.js</a>, <a href="api_v1.router.js.html#line41">line 41</a>
+        <a href="routes_v1.router.js.html">routes/v1.router.js</a>, <a href="routes_v1.router.js.html#line41">line 41</a>
     </li></ul></dd>
     
 
@@ -1355,6 +1251,8 @@ event to the `database` namespace of the message queue
 
     
 </dl>
+
+
 
 
 
@@ -1526,7 +1424,7 @@ event to the `database` namespace of the message queue
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="auth_auth-admin.router.js.html">auth/auth-admin.router.js</a>, <a href="auth_auth-admin.router.js.html#line27">line 27</a>
+        <a href="auth_auth-admin.router.js.html">auth/auth-admin.router.js</a>, <a href="auth_auth-admin.router.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -1536,6 +1434,8 @@ event to the `database` namespace of the message queue
 
     
 </dl>
+
+
 
 
 
@@ -1709,7 +1609,7 @@ Publish the request `url` as a `read` event to the
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_v1.router.js.html">api/v1.router.js</a>, <a href="api_v1.router.js.html#line25">line 25</a>
+        <a href="routes_v1.router.js.html">routes/v1.router.js</a>, <a href="routes_v1.router.js.html#line25">line 25</a>
     </li></ul></dd>
     
 
@@ -1719,6 +1619,8 @@ Publish the request `url` as a `read` event to the
 
     
 </dl>
+
+
 
 
 
@@ -1902,6 +1804,8 @@ Publishes the url as an `error` event to the
 
     
 </dl>
+
+
 
 
 
@@ -2126,6 +2030,8 @@ Publishes the url and error message as an `error` event to the
 
 
 
+
+
         
             
 
@@ -2310,6 +2216,8 @@ In the event the model is not found, node will throw a "MODULE_NOT_FOUND" error 
 
 
 
+
+
         
             
 
@@ -2467,7 +2375,7 @@ message queue
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_v1.router.js.html">api/v1.router.js</a>, <a href="api_v1.router.js.html#line101">line 101</a>
+        <a href="routes_v1.router.js.html">routes/v1.router.js</a>, <a href="routes_v1.router.js.html#line101">line 101</a>
     </li></ul></dd>
     
 
@@ -2477,6 +2385,8 @@ message queue
 
     
 </dl>
+
+
 
 
 
@@ -2654,7 +2564,7 @@ BETTER: Similar functionality could be added through a static method * on each m
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_v1-admin.router.js.html">api/v1-admin.router.js</a>, <a href="api_v1-admin.router.js.html#line25">line 25</a>
+        <a href="routes_v1-admin.router.js.html">routes/v1-admin.router.js</a>, <a href="routes_v1-admin.router.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -2664,6 +2574,8 @@ BETTER: Similar functionality could be added through a static method * on each m
 
     
 </dl>
+
+
 
 
 
@@ -2838,7 +2750,7 @@ message queue
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_v1.router.js.html">api/v1.router.js</a>, <a href="api_v1.router.js.html#line80">line 80</a>
+        <a href="routes_v1.router.js.html">routes/v1.router.js</a>, <a href="routes_v1.router.js.html#line80">line 80</a>
     </li></ul></dd>
     
 
@@ -2848,6 +2760,8 @@ message queue
 
     
 </dl>
+
+
 
 
 
@@ -2882,13 +2796,13 @@ message queue
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="auth_users.module_model.html">model</a></li><li><a href="module-auth_middleware.html">auth/middleware</a></li><li><a href="module-auth_router.html">auth/router</a></li><li><a href="module-middleware_404.html">middleware/404</a></li><li><a href="module-middleware_error.html">middleware/error</a></li><li><a href="module-middleware_model-finder.html">middleware/model-finder</a></li><li><a href="module-src_server.html">src/server</a></li></ul><h3>Classes</h3><ul><li><a href="BooksModel.html">BooksModel</a></li><li><a href="ModelClass.html">ModelClass</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addRole">addRole</a></li><li><a href="global.html#autoPopulateRoles">autoPopulateRoles</a></li><li><a href="global.html#autoPopulateUsers">autoPopulateUsers</a></li><li><a href="global.html#createRecord">createRecord</a></li><li><a href="global.html#deleteRecord">deleteRecord</a></li><li><a href="global.html#forceErr">forceErr</a></li><li><a href="global.html#getAll">getAll</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#home">home</a></li><li><a href="global.html#patchRecord">patchRecord</a></li><li><a href="global.html#randomRecord">randomRecord</a></li><li><a href="global.html#updateRecord">updateRecord</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="auth_users.module_model.html">model</a></li><li><a href="module-auth_middleware.html">auth/middleware</a></li><li><a href="module-auth_router.html">auth/router</a></li><li><a href="module-middleware_404.html">middleware/404</a></li><li><a href="module-middleware_error.html">middleware/error</a></li><li><a href="module-middleware_model-finder.html">middleware/model-finder</a></li><li><a href="module-src_server.html">src/server</a></li></ul><h3>Classes</h3><ul><li><a href="RestyWrapper.html">RestyWrapper</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addRole">addRole</a></li><li><a href="global.html#autoPopulateRoles">autoPopulateRoles</a></li><li><a href="global.html#autoPopulateUsers">autoPopulateUsers</a></li><li><a href="global.html#createRecord">createRecord</a></li><li><a href="global.html#deleteRecord">deleteRecord</a></li><li><a href="global.html#getAll">getAll</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#home">home</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#patchRecord">patchRecord</a></li><li><a href="global.html#randomRecord">randomRecord</a></li><li><a href="global.html#updateRecord">updateRecord</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Apr 12 2019 09:47:25 GMT-0700 (Pacific Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.2</a> on Wed Jul 10 2019 14:30:14 GMT-0700 (Pacific Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>
