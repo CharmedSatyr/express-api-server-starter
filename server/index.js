@@ -49,17 +49,19 @@ const swaggerDocument = require(`${cwd}/config/swagger.json`);
 app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // API Routers
-const authAdminRouter = require('./auth/auth-admin.router'); // Auth routes intended for admin use
-app.use(authAdminRouter);
+if (process.env.NODE_ENV !== 'production') {
+  const authAdminRouter = require('./auth/auth-admin.router'); // Auth routes intended for admin use
+  app.use(authAdminRouter);
+
+  const v1AdminRouter = require('./routes/v1-admin.router'); // API routes intended for admin use
+  app.use(v1AdminRouter);
+}
 
 const authRouter = require('./auth/auth.router'); // General auth routes
 app.use(authRouter);
 
-const v1AdminRouter = require('./routes/v1-admin.router'); // API routes intended for admin use
-app.use(v1AdminRouter);
-
-const v1Router = require('./routes/v1.router'); // General api routes
-app.use(v1Router);
+const router = require('./routes'); // General api routes
+app.use(router);
 
 // Catchalls
 app.use('*', notFound);

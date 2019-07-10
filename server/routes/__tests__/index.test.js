@@ -4,7 +4,7 @@ const supertest = require('supertest');
 const { server } = require('../../');
 const request = supertest(server);
 
-describe('v1.router', () => {
+describe('routes', () => {
   it('should be good', () => {
     expect(true).toBeTruthy();
   });
