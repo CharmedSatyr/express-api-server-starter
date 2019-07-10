@@ -5,24 +5,10 @@ const auth = require('../auth/middleware.js');
 const Roles = require('../auth/roles.schema.js');
 const Users = require('../auth/users.schema.js');
 
-router.get('/error', auth('read'), auth('create'), auth('update'), auth('delete'), forceErr);
 router.get('/users', auth('read'), auth('create'), auth('update'), auth('delete'), getUsers);
 router.post('/roles', auth('read'), auth('create'), auth('update'), auth('delete'), addRole);
 router.post('/autopopulate-roles', autoPopulateRoles);
 router.post('/autopopulate-users', autoPopulateUsers);
-
-/**
- * Force error handling
- * This is useful for testing the `./src/middleware/500.js` export
- * @function
- * @name forceErr
- * @param req {object} Express request object
- * @param res {object} Express response object
- * @param next {function} Express middleware function
- **/
-function forceErr(req, res, next) {
-  next('Error!');
-}
 
 /**
  * Console.log all `Users`
@@ -33,11 +19,13 @@ function forceErr(req, res, next) {
  * @param next {function} Express middleware function
  **/
 function getUsers(req, res, next) {
-  Users.find().then(users => {
-    users.forEach(user => {
-      console.log(user);
-    });
-  });
+  Users.find()
+    .then(users => {
+      users.forEach(user => {
+        console.log(user);
+      });
+    })
+    .catch(console.error);
   res.status(200).send('Accessing `/users`...');
 }
 
