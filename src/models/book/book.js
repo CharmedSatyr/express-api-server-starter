@@ -1,8 +1,9 @@
 'use strict';
 
-const RestyWrapper = require('../rest-wrapper.js');
-const BookModel = require('./books.schema.js');
+const RestyWrapper = require('../resty-wrapper');
+const BookModel = require('./book.model');
 
 // Export an instance of a class that uses RESTy methods
 // to perform CRUD operations on Book documents
-module.exports = new RestyWrapper(BookModel);
+const book = new RestyWrapper(BookModel);
+module.exports = book;
