@@ -50,8 +50,12 @@ function signup(req, res, next) {
  * @param next {function} Express middleware function
  */
 function signin(req, res, next) {
-  res.cookie('auth', req.token);
-  res.send(req.token);
+  try {
+    res.cookie('auth', req.token);
+    res.send(req.token);
+  } catch (e) {
+    next(e);
+  }
 }
 
 /**
@@ -82,8 +86,12 @@ function oauth(req, res, next) {
  * @param next {function} Express middleware function
  */
 function key(req, res, next) {
-  const key = req.user.generateKey();
-  res.status(200).send(key);
+  try {
+    const key = req.user.generateKey();
+    res.status(200).send(key);
+  } catch (e) {
+    next(e);
+  }
 }
 
 module.exports = authRouter;
