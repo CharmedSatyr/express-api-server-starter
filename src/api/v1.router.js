@@ -49,8 +49,8 @@ function home(req, res, next) {
  * @param next {function} Express middleware function
  **/
 function getRecords(req, res, next) {
-  // const { url } = req;
   const { id } = req.params;
+  // const { url } = req;
   // Q.publish('database', 'read', { id: id || null, url });
   req.model
     .get(id)
@@ -69,7 +69,7 @@ function getRecords(req, res, next) {
  * @param next {function} Express middleware function
  **/
 function createRecord(req, res, next) {
-  const { body /* , url */ } = req;
+  const { body /*, url */ } = req;
   // Q.publish('database', 'create', { body, url });
   req.model
     .post(body)
@@ -132,8 +132,8 @@ function patchRecord(req, res, next) {
  * @param next {function} Express middleware function
  **/
 function deleteRecord(req, res, next) {
-  // const { url } = req;
   const { id } = req.params;
+  // const { url } = req;
   // Q.publish('database', 'delete', { id, url });
   req.model
     .delete(id)
