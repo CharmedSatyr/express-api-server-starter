@@ -16,9 +16,9 @@
 module.exports = (req, res, next) => {
   try {
     const model = req.params.model.replace(/[^a-z0-9-_]/gi, '');
-    req.model = require(`../models/${model}/${model}.js`);
+    req.model = require(`../models/${model}/${model}`);
     next();
-  } catch (e) {
-    next(e);
+  } catch (err) {
+    next(err);
   }
 };
