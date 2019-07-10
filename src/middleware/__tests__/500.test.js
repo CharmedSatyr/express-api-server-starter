@@ -1,8 +1,12 @@
 'use strict';
 
-const { server } = require('../../../src/server.js');
-const supertest = require('supertest');
-const request = supertest(server);
+const cwd = process.cwd();
+const { server } = require(`${cwd}/src/server.js`);
+const supergoose = require(`${cwd}/__tests__/supergoose.js`);
+const request = supergoose.server(server);
+
+beforeAll(supergoose.startDB);
+afterAll(supergoose.stopDB);
 
 const error = jest.spyOn(global.console, 'error').mockImplementation(() => {});
 
@@ -12,13 +16,16 @@ const error = jest.spyOn(global.console, 'error').mockImplementation(() => {});
 
 describe('`500` error handler', () => {
   describe(`End-to-end tests`, () => {
-    it('should return status `500` on a server error', () => {
-      return request.get('/error').then(results => {
-        expect(results.status).toBe(500);
-        expect(error).toHaveBeenCalled();
-      });
+    it('should return status `500` on a server error', async () => {
+      expect.assertions(2);
+      // This is the dummy error route
+      const errorRoute = '/api/error';
+      const result = await request.post(errorRoute);
+      expect(result.status).toBe(500);
+      expect(error).toHaveBeenCalled();
     });
     it('should not return at status on a good request', async () => {
+      expect.assertions(1);
       const result = await request.get('/');
       expect(result.status).not.toBe(500);
     });
