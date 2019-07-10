@@ -14,7 +14,11 @@
  * @param next {function} Express middleware function
  **/
 module.exports = (req, res, next) => {
-  const model = req.params.model.replace(/[^a-z0-9-_]/gi, '');
-  req.model = require(`../models/${model}/${model}.model.js`);
-  next();
+  try {
+    const model = req.params.model.replace(/[^a-z0-9-_]/gi, '');
+    req.model = require(`../models/${model}/${model}.js`);
+    next();
+  } catch (e) {
+    next(e);
+  }
 };
