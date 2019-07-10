@@ -20,7 +20,7 @@
  **/
 module.exports = (err, req, res, next) => {
   console.error('__SERVER_ERROR__', err);
-  let error = { error: err.message || err };
+  const error = { error: err.message || err };
 
   // const { url } = req;
   // Q.publish('database', 'error', { url, error });
