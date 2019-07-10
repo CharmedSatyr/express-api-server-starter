@@ -1,8 +1,8 @@
 'use strict';
 
 const cwd = process.cwd();
-const { server } = require(`${cwd}/src/server.js`);
-const supergoose = require(`${cwd}/__tests__/supergoose.js`);
+const { server } = require(`${cwd}/src/server`);
+const supergoose = require(`${cwd}/src/__tests__/supergoose`);
 const request = supergoose.server(server);
 
 beforeAll(supergoose.startDB);
@@ -12,7 +12,7 @@ const error = jest.spyOn(global.console, 'error').mockImplementation(() => {});
 
 // TODO: Below are end-to-end tests;
 // we could add unit tests that require the notFound import
-// const errorHandler = require('../500.js');
+// const errorHandler = require('../500');
 
 describe('`500` error handler', () => {
   describe(`End-to-end tests`, () => {
