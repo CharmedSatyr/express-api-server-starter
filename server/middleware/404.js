@@ -18,14 +18,10 @@
  * @param next {function} Express next function
  */
 module.exports = (req, res, next) => {
-  const error = { error: 'Resource Not Found' };
-
   // const { url } = req;
   // Q.publish('database', 'error', { url });
-
-  res.statusCode = 404;
-  res.statusMessage = 'Not Found';
+  const status = 404;
+  const message = 'Not Found';
   res.setHeader('Content-Type', 'application/json');
-  res.write(JSON.stringify(error));
-  res.end();
+  res.status(status).send(JSON.stringify({ status, message }));
 };
