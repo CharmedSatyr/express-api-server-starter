@@ -13,6 +13,8 @@ router.param('model', modelFinder);
 // Instantiate Q client
 // const Q = require('@nmq/q/client');
 
+// Testing routes
+router.post('/api/error', forceErr);
 router.post(
   `/api/v1/:model/random`,
   auth('read'),
@@ -21,6 +23,19 @@ router.post(
   auth('delete'),
   randomRecord
 );
+
+/***
+ * Force error handling
+ * This is useful for testing the `./src/middleware/500.js` export
+ * @function
+ * @name forceErr
+ * @param req {object} Express request object
+ * @param res {object} Express response object
+ * @param next {function} Express middleware function
+ ***/
+function forceErr(req, res, next) {
+  next('Error!');
+}
 
 /**
  * Generate a random record for testing purposes
