@@ -24,10 +24,10 @@ describe('`404` error handler', () => {
       expect(res.status).toHaveBeenCalledWith(status);
     });
 
-    it('should have a header type of something', () => {
+    it('should have its header Content Type set', () => {
       expect(res.setHeader).toHaveBeenCalledWith(
         'Content-Type',
-        'application/json'
+        expect.any(String)
       );
     });
 
