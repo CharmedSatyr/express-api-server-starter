@@ -2,7 +2,7 @@
 /**
  * Model Finder Middleware
  * @module middleware/model-finder
- **/
+ */
 
 /**
  * Model Finder Middleware
@@ -12,7 +12,7 @@
  * @param req {object} Express request object
  * @param res {object} Express response object
  * @param next {function} Express middleware function
- **/
+ */
 module.exports = (req, res, next) => {
   try {
     const model = req.params.model.replace(/[^a-z0-9-_]/gi, '');
