@@ -1,4 +1,4 @@
-const { word } = require('faker').random;
+const { alphaNumeric, word } = require('faker').random;
 
 const cwd = process.cwd();
 const supergoose = require(`${cwd}/server/__tests__/supergoose`);
