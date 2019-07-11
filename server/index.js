@@ -11,9 +11,7 @@ const cwd = process.cwd();
 
 // 3rd party resources
 const express = require('express');
-const cors = require('cors');
 const morgan = require('morgan');
-const methodOverride = require('method-override');
 
 // Catchalls
 const notFound = require('./middleware/404');
@@ -23,25 +21,12 @@ const serverError = require('./middleware/500');
 const app = express();
 
 // App level middleware
-app.use(cors());
 app.use(morgan('dev'));
 
 // Parsers
 // NOTE: body-parser was added back to Express in 4.16.0
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-
-// Method Override Middleware
-app.use(
-  methodOverride((req, res) => {
-    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-      // look in urlencoded POST bodies and delete `_method`
-      let method = req.body._method;
-      delete req.body._method;
-      return method;
-    }
-  })
-);
 
 // Documentation
 const swaggerUI = require('swagger-ui-express');
