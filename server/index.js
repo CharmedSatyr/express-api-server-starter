@@ -27,8 +27,9 @@ app.use(cors());
 app.use(morgan('dev'));
 
 // Parsers
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// NOTE: body-parser was added back to Express in 4.16.0
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // Method Override Middleware
 app.use(
@@ -43,9 +44,9 @@ app.use(
 );
 
 // Documentation
-app.use('/docs', express.static(`${cwd}/docs`));
 const swaggerUI = require('swagger-ui-express');
 const swaggerDocument = require(`${cwd}/config/swagger.json`);
+app.use('/docs', express.static(`${cwd}/docs`));
 app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // API Router
