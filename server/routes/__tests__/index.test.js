@@ -1,4 +1,4 @@
-const { alphaNumeric, word } = require('faker').random;
+const { image, lorem, name, random } = require('faker');
 
 const cwd = process.cwd();
 const supergoose = require(`${cwd}/server/__tests__/supergoose`);
@@ -27,12 +27,12 @@ describe('v1 router', () => {
 
   it('responds with a 200 status to a GET for /api/v1/book/:id', async () => {
     const obj = {
-      title: word(),
-      author: word(),
-      isbn: alphaNumeric(),
-      image_url: word(),
-      description: word(),
-      bookshelf: word(),
+      title: lorem.words(),
+      author: name.findName(),
+      isbn: random.uuid(),
+      image_url: image.imageUrl(),
+      description: lorem.sentences(),
+      bookshelf: random.word(),
     };
     const response = await request.post('/api/v1/book').send(obj);
     const id = response.body._id;
@@ -43,12 +43,12 @@ describe('v1 router', () => {
 
   it('responds with a 200 status to a POST to /api/v1/book', async () => {
     const obj = {
-      title: word(),
-      author: word(),
-      isbn: alphaNumeric(),
-      image_url: word(),
-      description: word(),
-      bookshelf: word(),
+      title: lorem.words(),
+      author: name.findName(),
+      isbn: random.uuid(),
+      image_url: image.imageUrl(),
+      description: lorem.sentences(),
+      bookshelf: random.word(),
     };
     const response = await request.post('/api/v1/book').send(obj);
 
@@ -60,22 +60,22 @@ describe('v1 router', () => {
 
   it('responds with a 200 status to a PUT to /api/v1/book/:id', async () => {
     const obj = {
-      title: word(),
-      author: word(),
-      isbn: alphaNumeric(),
-      image_url: word(),
-      description: word(),
-      bookshelf: word(),
+      title: lorem.words(),
+      author: name.findName(),
+      isbn: random.uuid(),
+      image_url: image.imageUrl(),
+      description: lorem.sentences(),
+      bookshelf: random.word(),
     };
     const response = await request.post('/api/v1/book').send(obj);
     const id = response.body._id;
     const update = {
-      title: word(),
-      author: word(),
-      isbn: alphaNumeric(),
-      image_url: word(),
-      description: word(),
-      bookshelf: word(),
+      title: lorem.words(),
+      author: name.findName(),
+      isbn: random.uuid(),
+      image_url: image.imageUrl(),
+      description: lorem.sentences(),
+      bookshelf: random.word(),
     };
     const results = await request.put(`/api/v1/book/${id}`).send(update);
 
@@ -87,22 +87,22 @@ describe('v1 router', () => {
 
   it('responds with a 200 status to a PATCH to /api/v1/book/:id', async () => {
     const obj = {
-      title: word(),
-      author: word(),
-      isbn: alphaNumeric(),
-      image_url: word(),
-      description: word(),
-      bookshelf: word(),
+      title: lorem.words(),
+      author: name.findName(),
+      isbn: random.uuid(),
+      image_url: image.imageUrl(),
+      description: lorem.sentences(),
+      bookshelf: random.word(),
     };
     const response = await request.post('/api/v1/book').send(obj);
     const id = response.body._id;
     const update = {
-      title: word(),
-      author: word(),
-      isbn: alphaNumeric(),
-      image_url: word(),
-      description: word(),
-      bookshelf: word(),
+      title: lorem.words(),
+      author: name.findName(),
+      isbn: random.uuid(),
+      image_url: image.imageUrl(),
+      description: lorem.sentences(),
+      bookshelf: random.word(),
     };
     const result = await request.patch(`/api/v1/book/${id}`).send(update);
 
@@ -114,12 +114,12 @@ describe('v1 router', () => {
 
   it('responds with a 200 status to a DELETE to /api/v1/book/:id', async () => {
     const obj = {
-      title: word(),
-      author: word(),
-      isbn: alphaNumeric(),
-      image_url: word(),
-      description: word(),
-      bookshelf: word(),
+      title: lorem.words(),
+      author: name.findName(),
+      isbn: random.uuid(),
+      image_url: image.imageUrl(),
+      description: lorem.sentences(),
+      bookshelf: random.word(),
     };
     const response = await request.post('/api/v1/book').send(obj);
     const id = response.body._id;
