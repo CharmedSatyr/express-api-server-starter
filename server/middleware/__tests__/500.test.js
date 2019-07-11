@@ -3,11 +3,12 @@
 const cwd = process.cwd();
 const { server } = require(`${cwd}/server`);
 const supergoose = require(`${cwd}/server/__tests__/supergoose`);
-const request = supergoose.server(server);
+const request = supergoose.mockRequest(server);
 
 beforeAll(supergoose.startDB);
 afterAll(supergoose.stopDB);
 
+jest.spyOn(global.console, 'log').mockImplementation(() => {});
 const error = jest.spyOn(global.console, 'error').mockImplementation(() => {});
 
 // TODO: Below are end-to-end tests;
@@ -17,17 +18,23 @@ const error = jest.spyOn(global.console, 'error').mockImplementation(() => {});
 describe('`500` error handler', () => {
   describe(`End-to-end tests`, () => {
     it('should return status `500` on a server error', async () => {
-      expect.assertions(2);
-      // This is the dummy error route
-      const errorRoute = '/api/error';
-      const result = await request.post(errorRoute);
+      const doesNotSatisfySchema = {};
+      const result = await request
+        .post('/api/v1/book')
+        .send(doesNotSatisfySchema);
+
       expect(result.status).toBe(500);
       expect(error).toHaveBeenCalled();
+
+      expect.assertions(2);
     });
-    it('should not return at status on a good request', async () => {
-      expect.assertions(1);
+
+    it('should not return a 500 status on a good request', async () => {
       const result = await request.get('/');
+
       expect(result.status).not.toBe(500);
+
+      expect.assertions(1);
     });
   });
 });
