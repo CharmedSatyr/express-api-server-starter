@@ -15,7 +15,7 @@ let supergoose = (module.exports = {});
  * @server
  * @returns function that expects an express server
  */
-supergoose.server = server => supertest(server);
+supergoose.mockRequest = server => supertest(server);
 
 /**
  * Typically used in Jest beforeAll hook
