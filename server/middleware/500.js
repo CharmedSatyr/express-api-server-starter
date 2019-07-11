@@ -16,11 +16,10 @@
  */
 module.exports = (err, req, res, next) => {
   console.error('__SERVER_ERROR__', err);
-  const error = { error: err.message || err };
+  const status = 500;
+  const message =
+    (err && err.message) || (err && err.statusMessage) || err || 'Server Error';
 
-  res.statusCode = err.status || 500;
-  res.statusMessage = err.statusMessage || 'Server Error';
   res.setHeader('Content-Type', 'application/json');
-  res.write(JSON.stringify(error));
-  res.end();
+  res.status(500).send(JSON.stringify({ status, message }));
 };
