@@ -42,21 +42,17 @@ app.use(router);
 app.use('*', notFound);
 app.use(serverError);
 
-let isRunning = false;
-
 /**
- * Exported function to start the Express server
+ * Exported Express server object and start function.
+ * `start` is async to log the actual port listened on
+ * instead of merely passing an argument to `console.log`.
+ *
  * @param port {number} Port used for the server
  */
 module.exports = {
   server: app,
-  start: port => {
-    if (!isRunning) {
-      app.listen(port, () => {
-        console.log(`Server up on port ${port}...`);
-      });
-    } else {
-      console.log('Server is already running...');
-    }
+  start: async port => {
+    const listener = await app.listen(port);
+    console.log(`Server up on port ${listener.address().port}...`);
   },
 };
