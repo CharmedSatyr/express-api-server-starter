@@ -4,7 +4,7 @@
  * Server module - Integrates the logic of the application
  * and exports the Express `app` instance and `start` method.
  * @module src/server
- **/
+ */
 
 // Path
 const cwd = process.cwd();
@@ -48,18 +48,7 @@ const swaggerUI = require('swagger-ui-express');
 const swaggerDocument = require(`${cwd}/config/swagger.json`);
 app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
-// API Routers
-if (process.env.NODE_ENV !== 'production') {
-  const authAdminRouter = require('./auth/auth-admin.router'); // Auth routes intended for admin use
-  app.use(authAdminRouter);
-
-  const v1AdminRouter = require('./routes/v1-admin.router'); // API routes intended for admin use
-  app.use(v1AdminRouter);
-}
-
-const authRouter = require('./auth/auth.router'); // General auth routes
-app.use(authRouter);
-
+// API Router
 const router = require('./routes'); // General api routes
 app.use(router);
 
