@@ -3,12 +3,20 @@
   "version": "0.0.1",
   "description": "An extensible, authenticated REST server with event logging",
   "main": "index.js",
+  "engines": {
+    "node": "^11.8.0",
+    "npm": ">= 6.9.0"
+  },
   "directories": {
     "doc": "docs"
   },
   "author": "CharmedSatyr <z@charmed.tech>",
   "license": "GPL-3.0-or-later",
-  "keywords": [],
+  "keywords": [
+    "express",
+    "server",
+    "template"
+  ],
   "homepage": "https://github.com/CharmedSatyr/express-api-server-starter#readme",
   "repository": {
     "type": "git",
