@@ -9,6 +9,7 @@
   "author": "CharmedSatyr <z@charmed.tech>",
   "license": "GPL-3.0-or-later",
   "keywords": [],
+  "homepage": "https://github.com/CharmedSatyr/express-api-server-starter#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CharmedSatyr/express-api-server-starter.git"
@@ -16,15 +17,26 @@
   "bugs": {
     "url": "https://github.com/CharmedSatyr/express-api-server-starter/issues"
   },
-  "homepage": "https://github.com/CharmedSatyr/express-api-server-starter#readme",
   "scripts": {
     "start": "node index.js",
     "watch": "nodemon index.js",
     "lint": "eslint index.js && eslint 'server/**/*'",
     "test": "jest --coverage --verbose",
     "test-watch": "jest --coverage --verbose --watch",
+    "coverage": "jest --coverage && cat ./coverage/lcov.info | codacy-coverage --token ade4867bae464dfda77c41c94f40cec2",
     "doc": "jsdoc -c ./config/jsdoc.config.json",
     "clean": "rm -rf docs"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && npm run test",
+      "pre-push": "export CI=true && lint-staged && npm run coverage"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "tslint -c './tslint.json'"
+    ]
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
