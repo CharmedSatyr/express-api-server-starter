@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: src/server</title>
+    <title>JSDoc: Class: RestyWrapper</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: src/server</h1>
+    <h1 class="page-title">Class: RestyWrapper</h1>
 
     
 
@@ -28,10 +28,7 @@
 
 <header>
     
-        
-            
-        
-            
+        <h2><span class="attribs"><span class="type-signature"></span></span>RestyWrapper<span class="signature">(model)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -40,93 +37,11 @@
     <div class="container-overview">
     
         
-            <div class="description">Server module - Integrates the logic of the application
-and exports the Express `app` instance and `start` method.</div>
-        
-
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
 
     
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="module:src/server"><span class="type-signature"></span>module:src/server<span class="type-signature"></span></h4>
+    <h4 class="name" id="RestyWrapper"><span class="type-signature"></span>new RestyWrapper<span class="signature">(model)</span><span class="type-signature"></span></h4>
     
 
     
@@ -134,9 +49,9 @@ and exports the Express `app` instance and `start` method.</div>
 
 
 <div class="description">
-    Exported Express server object and start function.
-`start` is async to log the actual port listened on
-instead of merely passing an argument to `console.log`.
+    The class takes a Mongoose model as its constructor.
+It wraps it in methods with RESTy names. The RESTy
+methods are used to access the model's documents.
 </div>
 
 
@@ -172,13 +87,13 @@ instead of merely passing an argument to `console.log`.
 
         <tr>
             
-                <td class="name"><code>port</code></td>
+                <td class="name"><code>model</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">object</span>
 
 
             
@@ -188,7 +103,7 @@ instead of merely passing an argument to `console.log`.
 
             
 
-            <td class="description last">Port used for the server</td>
+            <td class="description last">Mongoose model</td>
         </tr>
 
     
@@ -229,7 +144,7 @@ instead of merely passing an argument to `console.log`.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line52">line 52</a>
+        <a href="models_resty-wrapper.js.html">models/resty-wrapper.js</a>, <a href="models_resty-wrapper.js.html#line3">line 3</a>
     </li></ul></dd>
     
 
@@ -259,7 +174,6 @@ instead of merely passing an argument to `console.log`.
 
 
 
-        
     
     </div>
 

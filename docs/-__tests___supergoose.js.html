@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: middleware/model-finder.js</title>
+    <title>JSDoc: Source: __tests__/supergoose.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: middleware/model-finder.js</h1>
+    <h1 class="page-title">Source: __tests__/supergoose.js</h1>
 
     
 
@@ -26,30 +26,57 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>'use strict';
-/**
- * Model Finder Middleware
- * @module middleware/model-finder
+            <pre class="prettyprint source linenums"><code>/**
+ * Combines SuperTest and Mongoose Memory Server
+ * to reduce (hopefully) the pain of
+ * testing a Mongoose API
  */
 
+const mongoose = require('mongoose');
+const MongoMemoryServer = require('mongodb-memory-server').default;
+const supertest = require('supertest');
+
+let mongoServer;
+
+let supergoose = (module.exports = {});
 /**
- * Model Finder Middleware
- * Evaluates req.params.model (i.e. /api/v1/:model/) and returns an instance of the specified model.
- * Because node require is cached, the instance will only be created once, no matter how many times a model is called for.
- * In the event the model is not found, node will throw a "MODULE_NOT_FOUND" error which the error middleware in the server will pick up.
- * @param req {object} Express request object
- * @param res {object} Express response object
- * @param next {function} Express middleware function
+ * @server
+ * @returns function that expects an express server
  */
-module.exports = (req, res, next) => {
-  try {
-    const model = req.params.model.replace(/[^a-z0-9-_]/gi, '');
-    req.model = require(`../models/${model}/${model}`);
-    next();
-  } catch (err) {
-    next(err);
-  }
+supergoose.mockRequest = server => supertest(server);
+
+/**
+ * Typically used in Jest beforeAll hook
+ */
+supergoose.startDB = async () => {
+  mongoServer = new MongoMemoryServer();
+
+  const mongoUri = await mongoServer.getConnectionString();
+
+  const mongooseOptions = {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  };
+
+  await mongoose.connect(mongoUri, mongooseOptions, err => {
+    if (err) console.error(err);
+  });
 };
+
+/**
+ * Typically used in Jest afterAll hook
+ */
+supergoose.stopDB = () => {
+  mongoose.disconnect();
+  mongoServer.stop();
+};
+
+// Just so that it can live in the tests folder
+describe('supergoose', () => {
+  it('is super', () => {
+    expect(true).toBeTruthy();
+  });
+});
 </code></pre>
         </article>
     </section>

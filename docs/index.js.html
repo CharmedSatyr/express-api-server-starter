@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: middleware/model-finder.js</title>
+    <title>JSDoc: Source: index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: middleware/model-finder.js</h1>
+    <h1 class="page-title">Source: index.js</h1>
 
     
 
@@ -27,28 +27,62 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>'use strict';
-/**
- * Model Finder Middleware
- * @module middleware/model-finder
- */
 
 /**
- * Model Finder Middleware
- * Evaluates req.params.model (i.e. /api/v1/:model/) and returns an instance of the specified model.
- * Because node require is cached, the instance will only be created once, no matter how many times a model is called for.
- * In the event the model is not found, node will throw a "MODULE_NOT_FOUND" error which the error middleware in the server will pick up.
- * @param req {object} Express request object
- * @param res {object} Express response object
- * @param next {function} Express middleware function
+ * Server module - Integrates the logic of the application
+ * and exports the Express `app` instance and `start` method.
+ * @module src/server
  */
-module.exports = (req, res, next) => {
-  try {
-    const model = req.params.model.replace(/[^a-z0-9-_]/gi, '');
-    req.model = require(`../models/${model}/${model}`);
-    next();
-  } catch (err) {
-    next(err);
-  }
+
+// Path
+const cwd = process.cwd();
+
+// 3rd party resources
+const express = require('express');
+const morgan = require('morgan');
+
+// Catchalls
+const notFound = require('./middleware/404');
+const serverError = require('./middleware/500');
+
+// Prepare the Express app
+const app = express();
+
+// App level middleware
+app.use(morgan('dev'));
+
+// Parsers
+// NOTE: body-parser was added back to Express in 4.16.0
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+// Documentation
+const swaggerUI = require('swagger-ui-express');
+const swaggerDocument = require(`${cwd}/config/swagger.json`);
+app.use('/docs', express.static(`${cwd}/docs`));
+app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
+// API Router
+const router = require('./routes'); // General api routes
+app.use(router);
+
+// Catchalls
+app.use('*', notFound);
+app.use(serverError);
+
+/**
+ * Exported Express server object and start function.
+ * `start` is async to log the actual port listened on
+ * instead of merely passing an argument to `console.log`.
+ *
+ * @param port {number} Port used for the server
+ */
+module.exports = {
+  server: app,
+  start: async port => {
+    const listener = await app.listen(port);
+    console.log(`Server up on port ${listener.address().port}...`);
+  },
 };
 </code></pre>
         </article>
