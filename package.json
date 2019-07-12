@@ -1,7 +1,7 @@
 {
-  "name": "express-api-server-starter",
+  "name": "express-server",
   "version": "0.0.1",
-  "description": "An extensible, authenticated REST server with event logging",
+  "description": "An extensible Express REST server",
   "main": "index.js",
   "engines": {
     "node": "^11.8.0",
@@ -18,13 +18,13 @@
     "server",
     "template"
   ],
-  "homepage": "https://github.com/CharmedSatyr/express-api-server-starter#readme",
+  "homepage": "https://github.com/CharmedSatyr/express-server#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CharmedSatyr/express-api-server-starter.git"
+    "url": "git+https://github.com/CharmedSatyr/express-server.git"
   },
   "bugs": {
-    "url": "https://github.com/CharmedSatyr/express-api-server-starter/issues"
+    "url": "https://github.com/CharmedSatyr/express-server/issues"
   },
   "scripts": {
     "start": "node index.js",
