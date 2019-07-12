@@ -3,12 +3,21 @@
   "version": "0.0.1",
   "description": "An extensible, authenticated REST server with event logging",
   "main": "index.js",
+  "engines": {
+    "node": "^11.8.0",
+    "npm": ">= 6.10.1",
+    "nvm": ">= 0.34.0"
+  },
   "directories": {
     "doc": "docs"
   },
   "author": "CharmedSatyr <z@charmed.tech>",
   "license": "GPL-3.0-or-later",
-  "keywords": [],
+  "keywords": [
+    "express",
+    "server",
+    "template"
+  ],
   "homepage": "https://github.com/CharmedSatyr/express-api-server-starter#readme",
   "repository": {
     "type": "git",
@@ -21,7 +30,7 @@
     "start": "node index.js",
     "watch": "nodemon index.js",
     "lint": "eslint index.js && eslint 'server/**/*'",
-    "test": "jest --coverage --verbose",
+    "test": "jest --coverage --verbose --detectOpenHandles",
     "test-watch": "jest --coverage --verbose --watch",
     "coverage": "jest --coverage && cat ./coverage/lcov.info | codacy-coverage --token ade4867bae464dfda77c41c94f40cec2",
     "doc": "jsdoc -c ./config/jsdoc.config.json",
@@ -29,7 +38,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run test",
+      "pre-commit": "npm run lint && npm run test",
       "pre-push": "export CI=true && lint-staged && npm run coverage"
     }
   },
