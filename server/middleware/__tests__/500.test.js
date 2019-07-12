@@ -4,10 +4,10 @@ const supertest = require('supertest');
 
 const cwd = process.cwd();
 
-const { server } = require(`${cwd}/server`);
+const { app } = require(`${cwd}/server`);
 const serverErr = require('../500');
 
-const request = supertest(server);
+const request = supertest(app);
 const err = 'Mock server error!';
 const send = jest.fn();
 const status = jest.fn().mockImplementation(() => ({ send }));

@@ -2,9 +2,9 @@ const { image, lorem, name, random } = require('faker');
 
 const cwd = process.cwd();
 const supergoose = require(`${cwd}/server/__tests__/supergoose`);
-const { server } = require(`${cwd}/server`);
+const { app } = require(`${cwd}/server`);
 
-const request = supergoose.mockRequest(server);
+const request = supergoose.mockRequest(app);
 
 beforeAll(supergoose.startDB);
 afterAll(supergoose.stopDB);
