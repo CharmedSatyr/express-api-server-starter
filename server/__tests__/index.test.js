@@ -1,6 +1,6 @@
 'use strict';
 
-const { server, start } = require('../');
+const { server /*, start */ } = require('../');
 
 const listen = jest.spyOn(server, 'listen'); // .mockImplementation(() => {});
 const log = jest.spyOn(global.console, 'log').mockImplementation(() => {});
