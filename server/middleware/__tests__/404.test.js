@@ -4,9 +4,9 @@ const supertest = require('supertest');
 const notFound = require('../404');
 
 const cwd = process.cwd();
-const { server } = require(`${cwd}/server`);
+const { app } = require(`${cwd}/server`);
 
-const request = supertest(server);
+const request = supertest(app);
 
 const send = jest.fn();
 const status = jest.fn().mockImplementation(() => ({ send }));
@@ -42,7 +42,7 @@ describe('`404` error handler', () => {
       expect(result.status).not.toBe(404);
     });
 
-    xit('should return status `404` on a bad request', async () => {
+    it('should return status `404` on a bad request', async () => {
       const result = await request.get('/foo');
       expect(result.status).toBe(404);
     });
