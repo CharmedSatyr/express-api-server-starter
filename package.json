@@ -30,7 +30,7 @@
     "start": "node index.js",
     "watch": "nodemon index.js",
     "lint": "eslint index.js && eslint 'server/**/*'",
-    "test": "jest --coverage --verbose",
+    "test": "jest --coverage --verbose --detectOpenHandles",
     "test-watch": "jest --coverage --verbose --watch",
     "coverage": "jest --coverage && cat ./coverage/lcov.info | codacy-coverage --token ade4867bae464dfda77c41c94f40cec2",
     "doc": "jsdoc -c ./config/jsdoc.config.json",
