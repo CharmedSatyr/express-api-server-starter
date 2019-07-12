@@ -32,8 +32,8 @@
     "lint": "eslint index.js && eslint 'server/**/*'",
     "test": "jest --coverage --verbose --detectOpenHandles",
     "test-watch": "jest --coverage --verbose --watch",
-    "coverage": "jest --coverage && cat ./coverage/lcov.info | codacy-coverage --token ade4867bae464dfda77c41c94f40cec2",
-    "doc": "jsdoc -c ./config/jsdoc.config.json",
+    "coverage": "jest --coverage && cat ./coverage/lcov.info | codacy-coverage --token 737076e62d8e4d65ac567f2ee77afd0b",
+    "doc": "npm run clean; jsdoc -c ./config/jsdoc.config.json",
     "clean": "rm -rf docs"
   },
   "husky": {

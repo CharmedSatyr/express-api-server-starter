@@ -4,11 +4,11 @@
  * The class takes a Mongoose model as its constructor.
  * It wraps it in methods with RESTy names. The RESTy
  * methods are used to access the model's documents.
- * 
- * @class RestyWrapper
+ *
+ * @class RESTyWrapper
  * @param model {object} Mongoose model
  */
-class RestyWrapper {
+class RESTyWrapper {
   constructor(schema) {
     this.schema = schema;
   }
@@ -35,4 +35,4 @@ class RestyWrapper {
   }
 }
 
-module.exports = RestyWrapper;
+module.exports = RESTyWrapper;
