@@ -2,7 +2,9 @@
 
 /**
  * Server module - Integrates the logic of the application
- * and exports the Express `app` instance and `start` method.
+ * and exports the Express `app` instance and `start` and
+ * `stop` methods.
+ *
  * @module src/server
  */
 
@@ -43,16 +45,32 @@ app.use('*', notFound);
 app.use(serverError);
 
 /**
- * Exported Express server object and start function.
- * `start` is async to log the actual port listened on
- * instead of merely passing an argument to `console.log`.
- *
- * @param port {number} Port used for the server
+ * Exports accumulated Express `app` with `start`, and `stop` functions
  */
 module.exports = {
-  server: app,
-  start: async port => {
-    const listener = await app.listen(port);
-    console.log(`Server up on port ${listener.address().port}...`);
+  app,
+  /**
+   * `start` method appends an `http.Server` instance to the `app` and logs the `port` detected
+   *
+   * @name start
+   * @function
+   * @param {integer} port The port the server should run on
+   */
+  start: port => {
+    app._server = app.listen(port); // Append `http.Server` to `app._server`
+    console.log(`Server up on port ${app._server.address().port}...`);
+  },
+  /**
+   * @name start
+   * @function
+   * `stop` method programmatically shuts down the `http.Server` instance
+   */
+  stop: () => {
+    if (app._server) {
+      app._server.close();
+      delete app._server; // Cleanup appended server
+    } else {
+      console.error('No server is running...');
+    }
   },
 };
