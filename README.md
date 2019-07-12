@@ -2,13 +2,14 @@
 
 ## Authenticated API Server with Event Logging
 
-### Author: Joseph Wolfe
+### Author: [CharmedSatyr](https://keybase.io/charmedsatyr)
 
 ### Links and Resources
 
 - [GitHub Repository](https://github.com/CharmedSatyr/express-api-server-starter)
 - [![Build Status](https://travis-ci.com/CharmedSatyr/express-api-server-starter.svg?branch=master)](https://travis-ci.com/CharmedSatyr/express-api-server-starter)
 - [![Codacy coverage](https://img.shields.io/codacy/coverage/ade4867bae464dfda77c41c94f40cec2.svg)](https://app.codacy.com/project/CharmedSatyr/express-api-server-starter/dashboard)
+- [![Known Vulnerabilities](https://dev.snyk.io/test/github/CharmedSatyr/express-api-server-starter/badge.svg)](https://dev.snyk.io/test/github/CharmedSatyr/express-api-server-starter/)
 - [![Greenkeeper badge](https://badges.greenkeeper.io/CharmedSatyr/express-api-server-starter.svg)](https://greenkeeper.io/)
 - [Application]()
 
