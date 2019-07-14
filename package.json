@@ -43,8 +43,8 @@
     }
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "tslint -c './tslint.json'"
+    "*.{js,jsx}": [
+      "eslint"
     ]
   },
   "dependencies": {
