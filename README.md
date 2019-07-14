@@ -180,9 +180,11 @@ PORT=3000
 mongod --dbpath=./data --port 27017
 ```
 
-2. Start the Node process with `npm run start` or `npm run watch`.
+2. Start the Node process with `npm run start` or `npm run watch:server`.
 
-Output in the terminal should confirm the server is running.
+3. If you want to use BrowserSync, start it with `npm run watch:ui`.
+
+Output in the terminal should confirm the processes are running.
 
 </details>
 
@@ -194,7 +196,7 @@ Output in the terminal should confirm the server is running.
 API routes for this server look like `/api/v1/{model}`.
 
 ```javascript
-router.get('/', c.home);
+router.get('/', c.index);
 router.get('/api/v1/:model', c.getRecords);
 router.get('/api/v1/:model/:id', c.getRecords);
 router.post('/api/v1/:model', c.createRecord);
@@ -256,7 +258,7 @@ The `book` model can now be accessed at `/api/v1/book` and will respond to REST 
 The current setup with the `book` model can be tested with the following commands:
 
 - `npm run test`
-- `npm run test-watch`
+- `npm run watch:test`
 - `npm run lint`
 
 Custom models will require their own tests, but those tests will likely be very similar! It might be possible to make testing more modular or automatic (based on interpolation from the `./server/models/{model}`) in the future.

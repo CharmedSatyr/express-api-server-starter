@@ -1,0 +1,15 @@
+extends layout
+
+block layout-content
+  header
+    h1 Express/Pug Template
+    h3 Welcome to the home page!
+
+  main
+    div
+      if isAuthenticated
+        div
+          a(href='/user') User profile
+      else
+        div
+          a(href='/login') Log in

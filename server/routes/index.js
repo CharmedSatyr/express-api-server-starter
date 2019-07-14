@@ -13,7 +13,7 @@ const c = require('../controllers');
 router.param('model', modelFinder);
 
 // Declare routes
-router.get('/', c.home);
+router.get('/', c.index);
 router.get('/api/v1/:model', c.getRecords);
 router.get('/api/v1/:model/:id', c.getRecords);
 router.post('/api/v1/:model', c.createRecord);
