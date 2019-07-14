@@ -44,7 +44,9 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": "eslint"
+    "*.{js,jsx}": [
+      "eslint"
+    ]
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
