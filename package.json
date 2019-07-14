@@ -28,10 +28,11 @@
   },
   "scripts": {
     "start": "node index.js",
-    "watch": "nodemon index.js",
+    "watch:server": "nodemon index.js",
+    "watch:ui": "browser-sync start --proxy=localhost:3000 --files='**/*.css, **/*.pug, **/*.js' --ignore=node_modules --reload-delay 100 --no-ui",
     "lint": "eslint index.js && eslint 'server/**/*'",
     "test": "jest --coverage --verbose --detectOpenHandles",
-    "test-watch": "jest --coverage --verbose --watch",
+    "watch:test": "jest --coverage --verbose --watch",
     "coverage": "jest --coverage && cat ./coverage/lcov.info | codacy-coverage --token 737076e62d8e4d65ac567f2ee77afd0b",
     "doc": "npm run clean; jsdoc -c ./config/jsdoc.config.json",
     "clean": "rm -rf docs"
@@ -62,13 +63,15 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
+    "browser-sync": "^2.26.7",
     "codacy-coverage": "^3.4.0",
     "eslint": "^6.0.1",
     "husky": "^3.0.0",
     "jest": "^24.8.0",
     "jsdoc": "^3.6.2",
     "lint-staged": "^9.2.0",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "pug": "^2.0.4"
   },
   "jest": {
     "testEnvironment": "node"

@@ -9,8 +9,8 @@
  * @param res {object} Express response object
  * @param next {function} Express middleware function
  */
-exports.home = (req, res, next) => {
-  res.status(200).send('Welcome to the home page!');
+exports.index = (req, res, next) => {
+  res.status(200).render('index', { title: 'Home' });
 };
 
 /**
