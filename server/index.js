@@ -30,17 +30,25 @@ app.use(morgan('dev'));
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
+// View Engine
+app.set('views', `${cwd}/views`);
+app.set('view engine', 'pug');
+app.use(express.static(`${cwd}/public`));
+
 // Documentation
 const swaggerUI = require('swagger-ui-express');
 const swaggerDocument = require(`${cwd}/config/swagger.json`);
 app.use('/docs', express.static(`${cwd}/docs`));
 app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
-// API Router
+// Routes
 const router = require('./routes'); // General api routes
-app.use(router);
+const authRouter = require('./routes/auth'); // Auth routes
 
-// Catchalls
+app.use(router);
+app.use(authRouter);
+
+// Error handling
 app.use('*', notFound);
 app.use(serverError);
 
