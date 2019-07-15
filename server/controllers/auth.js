@@ -5,5 +5,5 @@ exports.login = (req, res) => {
 };
 
 exports.user = (req, res) => {
-  res.status(200).render('user', { title: 'User Profile' });
+  res.status(200).render('user', { title: 'User Profile', user: 'toad' });
 };
