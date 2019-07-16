@@ -11,6 +11,9 @@
 // Path
 const cwd = process.cwd();
 
+// Import environmental variables
+require('dotenv').config();
+
 // 3rd party resources
 const express = require('express');
 const morgan = require('morgan');
@@ -40,6 +43,57 @@ const swaggerUI = require('swagger-ui-express');
 const swaggerDocument = require(`${cwd}/config/swagger.json`);
 app.use('/docs', express.static(`${cwd}/docs`));
 app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
+// Authentication
+const session = require('express-session');
+
+// Config express-session
+const sess = {
+  secret: 'AUTH0_IS-mY-FAVE',
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+};
+
+if (app.get('env') === 'production') {
+  sess.cookie.secure = true; // serve secure cookies, requires https
+}
+
+app.use(session(sess));
+
+// Load Passport
+const passport = require('passport');
+const Auth0Strategy = require('passport-auth0');
+
+// Configure Passport to use Auth0
+const strategy = new Auth0Strategy(
+  {
+    clientID: process.env.AUTH0_CLIENT_ID,
+    clientSecret: process.env.AUTH0_CLIENT_SECRET,
+    callbackURL: process.env.AUTH0_CALLBACK_URL,
+    domain: process.env.AUTH0_DOMAIN || 'charmed-social.auth0.com',
+  },
+  function(accessToken, refreshToken, extraParams, profile, done) {
+    // accessToken is the token to call Auth0 API (not needed in the most cases)
+    // extraParams.id_token has the JSON Web Token
+    // profile has all the information from the user
+    return done(null, profile);
+  }
+);
+
+passport.use(strategy);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// You can use this section to keep a smaller payload
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 // Routes
 const router = require('./routes'); // General api routes
