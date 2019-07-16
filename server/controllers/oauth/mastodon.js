@@ -11,7 +11,6 @@ const authorize = req => {
     client_secret: process.env.MASTODON_CLIENT_SECRET,
     code,
     grant_type: 'authorization_code',
-    redirect_uri: process.env.MASTODON_REDIRECT_URI,
     scopes: 'read:accounts',
   };
 
@@ -22,12 +21,15 @@ const authorize = req => {
     .then(response => {
       const token = response.body.access_token;
       console.log('(2) ACCESS TOKEN:', token);
+      // const profileUrl = 'https://charmed.social/api/v1/accounts/verify_credentials';
+      const profileUrl = 'https://charmed.social/api/v1/admin/accounts';
       return superagent
-        .get('https://charmed.social/api/v1/accounts/verify_credentials')
+        .get(profileUrl)
         .set('Authorization', `Bearer ${token}`)
         .then(info => {
+          console.log('(3) INFO: ', info);
           const profile = info.body;
-          console.log('(3) PROFILE:', profile);
+          console.log('(4) PROFILE:', profile);
           return profile;
         });
     })
