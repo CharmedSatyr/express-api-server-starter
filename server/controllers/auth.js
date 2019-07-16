@@ -1,5 +1,6 @@
 'use strict';
 
+// Currently only Mastodon OAuth via charmed.social is supported
 const authorize = require('../controllers/oauth/mastodon');
 
 // Login

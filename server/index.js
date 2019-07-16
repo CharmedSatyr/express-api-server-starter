@@ -42,11 +42,13 @@ app.use('/docs', express.static(`${cwd}/docs`));
 app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // Routes
-const router = require('./routes'); // General api routes
+const router = require('./routes'); // Base pages
 const authRouter = require('./routes/auth'); // Auth routes
+const apiRouter = require('./routes/api'); // API routes
 
 app.use(router);
 app.use(authRouter);
+app.use(apiRouter);
 
 // Error handling
 app.use('*', notFound);
