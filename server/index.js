@@ -5,7 +5,7 @@
  * and exports the Express `app` instance and `start` and
  * `stop` methods.
  *
- * @module src/server
+ * @module server/index
  */
 
 // Path
