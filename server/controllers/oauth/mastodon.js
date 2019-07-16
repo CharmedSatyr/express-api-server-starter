@@ -20,16 +20,20 @@ const authorize = req => {
     .type('form')
     .send(opts1)
     .then(response => {
+      console.log('(2) RESPONSE: ', response);
       const token = response.body.access_token;
-      console.log('(2) ACCESS TOKEN:', token);
-      return superagent
-        .get('https://charmed.social/api/v1/accounts/verify_credentials')
-        .set('Authorization', `Bearer ${token}`)
-        .then(info => {
-          const profile = info.body;
-          console.log('(3) PROFILE:', profile);
-          return profile;
-        });
+      console.log('(4) ACCESS TOKEN:', token);
+      return (
+        superagent
+          .get('https://charmed.social/api/v1/accounts/verify_credentials')
+          // .get('https://charmed.social/api/v1/admin/accounts/')
+          .set('Authorization', `Bearer ${token}`)
+          .then(info => {
+            const profile = info.body;
+            console.log('(5) PROFILE:', profile);
+            return profile;
+          })
+      );
     })
     .catch(console.error);
 };
