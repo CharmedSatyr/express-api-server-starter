@@ -8,7 +8,7 @@ const { app } = require(`${cwd}/server`);
 const request = supertest(app);
 
 describe('auth router', () => {
-  it('responds with a 200 status to a GET for /login', async () => {
+  xit('responds with a 200 status to a GET for /login', async () => {
     const response = await request.get('/login');
     expect(response.status).toBe(200);
   });
