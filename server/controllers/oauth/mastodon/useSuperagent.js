@@ -16,6 +16,8 @@ const authorize = req => {
     redirect_uri: process.env.MASTODON_REDIRECT_URI,
     scopes: 'read:accounts',
   };
+  const profileURL =
+    'https://charmed.social/api/v1/accounts/verify_credentials';
 
   return superagent
     .post(tokenURL)
@@ -23,35 +25,26 @@ const authorize = req => {
     .send(opts1)
     .then(response => {
       const token = response.body.access_token;
-
       console.log('(2) ACCESS TOKEN:', token);
-      return superagent.get(
-        'https://charmed.social/api/v1/accounts/verify_credentials',
-        { headers: { Authorization: `Bearer ${token}` } },
-        function(err, res1, body) {
-          if (err) {
-            throw new Error(err);
-          }
 
-          if (res1.statusCode !== 200) {
-            throw new Error('statusCode: ', res1.statusCode);
-          }
-
-          const parsed = JSON.parse(body);
-          console.log('(3) PARSED:', parsed);
+      return superagent
+        .get(profileURL)
+        .set('Authorization', `Bearer ${token}`)
+        .then(response => {
+          const p = response.body;
 
           const profile = {
-            created_at: parsed.created_at,
-            picture: parsed.avatar,
-            nickname: parsed.display_name,
-            user_id: parsed.id,
-            username: parsed.username,
+            created_at: p.created_at,
+            picture: p.avatar,
+            nickname: p.display_name,
+            user_id: p.id,
+            username: p.username,
           };
-          console.log('(4) PROFILE:', profile);
+          console.log('(3) PROFILE:', profile);
 
           return profile;
-        }
-      );
+        })
+        .catch(console.error);
     });
 };
 
