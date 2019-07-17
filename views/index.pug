@@ -11,9 +11,7 @@ block layout-content
         div
           a(href='/user') User profile
       else
-        div#login
         div
-          a(href='/fogin') Login with Auth0
-
-block scripts
-  script(type='text/javascript', src='/login.js')
+          a(href='/login') Login with Mastodon OAuth
+        div
+          a(href='/login-auth0') Login with Auth0

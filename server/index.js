@@ -5,7 +5,7 @@
  * and exports the Express `app` instance and `start` and
  * `stop` methods.
  *
- * @module src/server
+ * @module server/index
  */
 
 // Path
@@ -96,11 +96,13 @@ passport.deserializeUser(function(user, done) {
 });
 
 // Routes
-const router = require('./routes'); // General api routes
+const router = require('./routes'); // Base pages
 const authRouter = require('./routes/auth'); // Auth routes
+const apiRouter = require('./routes/api'); // API routes
 
 app.use(router);
 app.use(authRouter);
+app.use(apiRouter);
 
 // Error handling
 app.use('*', notFound);

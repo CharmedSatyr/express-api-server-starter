@@ -4,27 +4,22 @@ const passport = require('passport');
 const router = require('express').Router();
 
 const c = require('../controllers/auth');
-const authorize = require('../controllers/oauth/mastodon');
 
 router.get('/user', c.user);
 
 // Used without Auth0
-router.get('/skallback', (req, res) => {
-  authorize(req).then(user => {
-    console.log('user:', user);
-    res.redirect('/user');
-  });
-}); // User is redirected here with code
+router.get('/login', c.login);
+router.get('/callback', c.callback);
 
 // Used with Auth0
 router.get(
-  '/fogin',
+  '/login-auth0',
   passport.authenticate('auth0', {
     failureRedirect: '/',
     scope: 'openid email profile',
   }),
   (req, res) => {
-    res.redirect('http://127.0.0.1:3000');
+    res.redirect('/');
   }
 );
 
@@ -35,7 +30,7 @@ router.get('/auth0-cb', (req, res, next) => {
     }
 
     if (!user) {
-      return res.redirect('/login');
+      return res.redirect('/');
     }
 
     req.logIn(user, function(err) {
