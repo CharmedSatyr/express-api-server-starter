@@ -32,7 +32,7 @@ let username;
 exports.callback = (req, res) => {
   authorize(req)
     .then(profile => {
-      username = profile && profile.username && profile.display_name;
+      username = profile && profile.username && profile.nickname;
       res.status(200).redirect('/user');
     })
     .catch(err => {
