@@ -1,5 +1,5 @@
 {
-  "name": "express-server",
+  "name": "express-pug-server",
   "version": "0.0.1",
   "description": "An extensible Express REST server",
   "main": "index.js",
@@ -18,13 +18,13 @@
     "server",
     "template"
   ],
-  "homepage": "https://github.com/CharmedSatyr/express-server#readme",
+  "homepage": "https://github.com/CharmedSatyr/express-pug-server#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CharmedSatyr/express-server.git"
+    "url": "git+https://github.com/CharmedSatyr/express-pug-server.git"
   },
   "bugs": {
-    "url": "https://github.com/CharmedSatyr/express-server/issues"
+    "url": "https://github.com/CharmedSatyr/express-pug-server/issues"
   },
   "scripts": {
     "start": "node index.js",

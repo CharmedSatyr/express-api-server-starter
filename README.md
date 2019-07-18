@@ -1,9 +1,9 @@
 # Express API Server Template
 
-[![Build Status](https://travis-ci.com/CharmedSatyr/express-server.svg?branch=master)](https://travis-ci.com/CharmedSatyr/express-server)
-[![Codacy coverage](https://img.shields.io/codacy/coverage/737076e62d8e4d65ac567f2ee77afd0b.svg)](https://app.codacy.com/project/CharmedSatyr/express-server/dashboard)
-[![Known Vulnerabilities](https://dev.snyk.io/test/github/CharmedSatyr/express-server/badge.svg)](https://dev.snyk.io/test/github/CharmedSatyr/express-server/)
-[![Greenkeeper badge](https://badges.greenkeeper.io/CharmedSatyr/express-server.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.com/CharmedSatyr/express-pug-server.svg?branch=master)](https://travis-ci.com/CharmedSatyr/express-pug-server)
+[![Codacy coverage](https://img.shields.io/codacy/coverage/737076e62d8e4d65ac567f2ee77afd0b.svg)](https://app.codacy.com/project/CharmedSatyr/express-pug-server/dashboard)
+[![Known Vulnerabilities](https://dev.snyk.io/test/github/CharmedSatyr/express-pug-server/badge.svg)](https://dev.snyk.io/test/github/CharmedSatyr/express-pug-server/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/CharmedSatyr/express-pug-server.svg)](https://greenkeeper.io/)
 
 An extensible REST server template
 
@@ -13,7 +13,7 @@ An extensible REST server template
 
 ## Links
 
-- [GitHub Repository](https://github.com/CharmedSatyr/express-server)
+- [GitHub Repository](https://github.com/CharmedSatyr/express-pug-server)
 
 - [Swagger]() (Pending deployment)
 
@@ -110,13 +110,13 @@ Potential future features are listed in the **TODO** section below.
 Using **ssh**:
 
 ```bash
-git clone git@github.com:[Your-Username]/express-server.git
+git clone git@github.com:[Your-Username]/express-pug-server.git
 ```
 
 Using **https**:
 
 ```bash
-git clone https://github.com/[Your-Username]/express-server.git
+git clone https://github.com/[Your-Username]/express-pug-server.git
 ```
 
 You can also download and uppack the `zip` file.
@@ -124,7 +124,7 @@ You can also download and uppack the `zip` file.
 2. Navigate into the project directory.
 
 ```bash
-cd express-server
+cd express-pug-server
 ```
 
 3. Install the project's dependencies
