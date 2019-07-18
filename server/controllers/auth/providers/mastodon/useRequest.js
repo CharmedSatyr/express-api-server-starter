@@ -7,9 +7,10 @@ const authorize = req => {
 
   console.log('(1) CODE:', code);
 
-  const tokenURL = 'https://charmed.social/oauth/token';
+  const tokenURL = process.env.MASTODON_INSTANCE_URL + '/oauth/token';
   const profileURL =
-    'https://charmed.social/api/v1/accounts/verify_credentials';
+    process.env.MASTODON_INSTANCE_URL + '/api/v1/accounts/verify_credentials';
+
   const opts1 = {
     client_id: process.env.MASTODON_CLIENT_KEY,
     client_secret: process.env.MASTODON_CLIENT_SECRET,

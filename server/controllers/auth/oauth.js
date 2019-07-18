@@ -1,7 +1,7 @@
 'use strict';
 
-// Currently only Mastodon OAuth via charmed.social is supported
-const authorize = require('../controllers/oauth/mastodon');
+// Currently only Mastodon OAuth is supported
+const authorize = require('./providers/mastodon');
 
 // Login
 exports.login = (req, res) => {
@@ -25,24 +25,18 @@ exports.login = (req, res) => {
   res.redirect(authURL);
 };
 
-// Accessed in `callback` and `user`
-let username;
-
 // Callback
 exports.callback = (req, res) => {
   authorize(req)
-    .then(profile => {
-      username = profile && profile.username && profile.nickname;
+    .then(user => {
+      req.session.user = user;
+      req.session.isAuthenticated = true;
       res.status(200).redirect('/user');
     })
     .catch(err => {
+      req.session.isAuthenticated = false;
       console.error(err);
 
       res.redirect('/');
     });
-};
-
-// User Profile
-exports.user = (req, res) => {
-  res.status(200).render('user', { title: 'User Profile', user: username });
 };

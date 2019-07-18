@@ -100,8 +100,8 @@ const router = require('./routes'); // Base pages
 const authRouter = require('./routes/auth'); // Auth routes
 const apiRouter = require('./routes/api'); // API routes
 
-app.use(router);
 app.use(authRouter);
+app.use(router);
 app.use(apiRouter);
 
 // Error handling

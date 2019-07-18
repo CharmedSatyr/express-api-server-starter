@@ -10,5 +10,10 @@
  * @param next {function} Express middleware function
  */
 exports.index = (req, res, next) => {
-  res.status(200).render('index', { title: 'Home' });
+  res
+    .status(200)
+    .render('index', {
+      title: 'Home',
+      isAuthenticated: req.session.isAuthenticated,
+    });
 };
