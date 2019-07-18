@@ -10,6 +10,8 @@ block layout-content
       if isAuthenticated
         div
           a(href='/user') User profile
+        div
+          a(href='/logout') Log Out
       else
         div
           a(href='/login') Login with Mastodon OAuth
