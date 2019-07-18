@@ -1,0 +1,9 @@
+body {
+  background: rebeccapurple;
+  font-family: sans-serif;
+}
+
+a,
+a:visited {
+  color: yellow;
+}

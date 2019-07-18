@@ -1,0 +1,19 @@
+extends layout
+
+block layout-content
+  header
+    h1 Express/Pug Template
+    h3 Welcome to the home page!
+
+  main
+    div
+      if isAuthenticated
+        div
+          a(href='/user') User profile
+        div
+          a(href='/logout') Log Out
+      else
+        div
+          a(href='/login') Login with Mastodon OAuth
+        div
+          a(href='/login-auth0') Login with Auth0
