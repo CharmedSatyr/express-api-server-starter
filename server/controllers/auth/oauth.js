@@ -1,7 +1,7 @@
 'use strict';
 
 // Currently only Mastodon OAuth is supported
-const authorize = require('./providers/mastodon');
+const { authorize, revoke } = require('./providers/mastodon');
 
 // Login
 exports.login = (req, res) => {
@@ -15,13 +15,10 @@ exports.login = (req, res) => {
   };
 
   const queryString = Object.keys(options)
-    .map(key => {
-      return key + '=' + encodeURIComponent(options[key]);
-    })
+    .map(key => key + '=' + encodeURIComponent(options[key]))
     .join('&');
 
   const authURL = mastoURL + '?' + queryString;
-
   res.redirect(authURL);
 };
 
@@ -37,6 +34,21 @@ exports.callback = (req, res) => {
       req.session.isAuthenticated = false;
       console.error(err);
 
+      res.redirect('/');
+    });
+};
+
+// Logout
+exports.logout = (req, res) => {
+  revoke(req)
+    .then(response => {
+      console.log('response:', response);
+      req.session.isAuthenticated = false;
+      res.redirect('/');
+    })
+    .catch(err => {
+      req.session.isAuthenticated = false;
+      console.error(err);
       res.redirect('/');
     });
 };
