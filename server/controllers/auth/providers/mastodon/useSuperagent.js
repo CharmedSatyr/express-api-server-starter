@@ -47,4 +47,17 @@ const authorize = req => {
     });
 };
 
-module.exports = authorize;
+const revoke = req => {
+  const opts = {
+    client_id: process.env.MASTODON_CLIENT_KEY,
+    client_secret: process.env.MASTODON_CLIENT_SECRET,
+  };
+  const logoutURL = process.env.MASTODON_INSTANCE_URL + '/oauth/revoke';
+  return superagent
+    .post(logoutURL)
+    .type('form')
+    .send(opts)
+    .then(response => response);
+};
+
+module.exports = { authorize, revoke };

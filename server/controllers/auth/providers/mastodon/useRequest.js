@@ -11,7 +11,7 @@ const authorize = req => {
   const profileURL =
     process.env.MASTODON_INSTANCE_URL + '/api/v1/accounts/verify_credentials';
 
-  const opts1 = {
+  const opts = {
     client_id: process.env.MASTODON_CLIENT_KEY,
     client_secret: process.env.MASTODON_CLIENT_SECRET,
     code,
@@ -21,7 +21,7 @@ const authorize = req => {
   };
 
   return new Promise((resolve, reject) => {
-    request.post({ url: tokenURL, formData: opts1 }, (err, h, b) => {
+    request.post({ url: tokenURL, formData: opts }, (err, h, b) => {
       if (err) {
         reject(err);
       }
@@ -32,13 +32,13 @@ const authorize = req => {
       return request.get(
         profileURL,
         { headers: { Authorization: `Bearer ${token}` } },
-        (e, res1, body) => {
+        (e, res, body) => {
           if (e) {
             reject(e);
           }
 
-          if (res1.statusCode !== 200) {
-            reject(`statusCode: ${res1.statusCode}`);
+          if (res.statusCode !== 200) {
+            reject(`statusCode: ${res.statusCode}`);
           }
 
           const parsed = JSON.parse(body);
@@ -58,4 +58,21 @@ const authorize = req => {
   });
 };
 
-module.exports = authorize;
+const revoke = req => {
+  const opts = {
+    client_id: process.env.MASTODON_CLIENT_KEY,
+    client_secret: process.env.MASTODON_CLIENT_SECRET,
+  };
+  const logoutURL = process.env.MASTODON_INSTANCE_URL + '/oauth/revoke';
+
+return new Promise((resolve, reject) => {
+  request.post({ url: logoutURL, formData: opts }, (err, h, b) => {
+    if (err) {
+      reject(err);
+    }
+    const body = JSON.parse(b);
+    resolve(body);
+  })
+});
+}
+module.exports = { authorize, revoke };
