@@ -12,17 +12,14 @@
     "res": true,
     "next": true
   },
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "prettier"],
   "parser": "babel-eslint",
-  "parserOptions": {
-    "sourceType": "module"
-  },
   "rules": {
-    "no-unused-vars": ["error", { "argsIgnorePattern": "^req$|^res$|^next$" }],
-    "no-console": "off",
-    "indent": ["error", 2, { "SwitchCase": 1 }],
-    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
-    "comma-dangle": ["error", "always-multiline"],
-    "semi": ["error", "always"]
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^req$|^res$|^next$"
+      }
+    ]
   }
 }
