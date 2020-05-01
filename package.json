@@ -35,7 +35,9 @@
     "watch:test": "jest --coverage --verbose --watch",
     "coverage": "jest --coverage && cat ./coverage/lcov.info | codacy-coverage --token 737076e62d8e4d65ac567f2ee77afd0b",
     "doc": "npm run clean; jsdoc -c ./config/jsdoc.config.json",
-    "clean": "rm -rf docs"
+    "clean": "rm -rf docs",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "husky": {
     "hooks": {
@@ -64,7 +66,8 @@
     "request": "^2.88.0",
     "superagent": "^5.1.0",
     "supertest": "^4.0.2",
-    "swagger-ui-express": "^4.0.7"
+    "swagger-ui-express": "^4.0.7",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
@@ -81,5 +84,6 @@
   },
   "jest": {
     "testEnvironment": "node"
-  }
+  },
+  "snyk": true
 }
